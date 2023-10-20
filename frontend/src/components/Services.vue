@@ -12,19 +12,19 @@ import IconMenu from '@/components/IconMenu.vue'
 
 const services = [
 	{
-		name: 'Story1',
+		// name: 'Story1',
 		to: 'Deposit'
 	},
 	{
-		name: 'Story2',
+		// name: 'Story2',
 		to: 'Transfer'
 	},
 	{
-		name: 'Story3',
+		// name: 'Story3',
 		to: 'WithDraw'
 	},
 	{
-		name: 'Story4',
+		// name: 'Story4',
 		to: 'ChangePoint'
 	}
 ]

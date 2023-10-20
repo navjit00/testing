@@ -7,10 +7,10 @@
 </style>
 
 <template>
-	<main class="pt-5">
+	<main class="pt-1">
 		<HeaderHome/>
 		<section class="mt-0"> 
-			<h1 class="title">Stories</h1>
+			<!-- <h1 class="title">Stories</h1> -->
 			<Services />
 		</section>
 		<br>
