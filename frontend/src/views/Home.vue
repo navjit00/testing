@@ -7,14 +7,15 @@
 </style>
 
 <template>
-	<main class="pt-20">
+	<main class="pt-5">
 		<HeaderHome/>
 		<section class="mt-0"> 
 			<h1 class="title">Stories</h1>
 			<Services />
 		</section>
+		<br>
 		<BalanceCard />
-		<section class="mt-12">
+		<section class="mt-10">
 			<h1 class="title">Promo hari ini</h1>
 			<Promo />
 		</section>
