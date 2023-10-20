@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const useBalance = defineStore('balance', {
 	state() {
 		return {
-			current: 1456889,
+			current: 1200,
 			points: 1200,
 			trend: {
 				title: 'up',
