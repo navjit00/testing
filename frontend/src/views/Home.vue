@@ -65,6 +65,12 @@
   background-color: #e0e0e0;
   align-self: flex-end;
 }
+.received-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
 .bot-message {
   background-color: #FFCA28;
 }
@@ -95,7 +101,14 @@
     <section>
       <div class="chatbox" ref="chatbox">
         <TransitionGroup name="list" tag="div">
-          <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">{{ msg.text }}</div>
+          <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
+            <template v-if="msg.image">
+              <img :src="msg.image" alt="Received Image" class="received-image">
+            </template>
+            <template v-else>
+              {{ msg.text }}
+            </template>
+          </div>
         </TransitionGroup>
       </div>
       <div class="chat-interface">
@@ -123,40 +136,49 @@ async function sendMessage() {
       id: Date.now(),
       type: "user-message",
       text: userInput.value,
-      typing: false
+      image: null,
     };
+
     messages.value.push(userMessage);
 
     userInput.value = "";
 
-    try {
-      const response = await axios.post('https://chat.com/api/send', { message: userMessage.text });
-      const apiResponse = response.data;
+    if (userMessage.text.toLowerCase() === "show me an image") {
+      messages.value.push({
+        id: Date.now() + 1,
+        type: "bot-message",
+        text: "",
+        image: "https://picsum.photos/400/300"
+      });
+    } else {
+      try {
+        const response = await axios.post('https://chat.com/api/send', { message: userMessage.text });
+        const apiResponse = response.data;
 
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "bot-message",
-        text: apiResponse.text
-      });
-    } catch (error) {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "bot-message",
-        text: "Unable to connect to the server."
-      });
+        if (apiResponse.type === "image") {
+          messages.value.push({
+            id: Date.now() + 1,
+            type: "bot-message",
+            text: "",
+            image: apiResponse.data // URL or base64 data
+          });
+        } else {
+          messages.value.push({
+            id: Date.now() + 1,
+            type: "bot-message",
+            text: apiResponse.data
+          });
+        }
+      } catch (error) {
+        messages.value.push({
+          id: Date.now() + 1,
+          type: "bot-message",
+          text: "Unable to connect to the server."
+        });
+      }
     }
   }
 }
-
-async function typeMessage(message) {
-  for (let i = 0; i <= message.text.length; i++) {
-    await new Promise(resolve => setTimeout(resolve, 50)); // 50ms delay between each character
-    message.typing = message.text.substring(0, i);
-  }
-  message.typing = false;
-}
-
-
 onMounted(() => {
   messages.value.push({
     id: Date.now(),
