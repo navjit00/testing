@@ -6,7 +6,7 @@ h1 {
 </style>
 
 <template>
-	<main class="w-full mx-auto bg-gradient-to-r from-success to-amber-400 ring-2 ring-amber-600 px-1 py-1 rounded-xl flex gap-4 items-start justify-evenly">
+	<main class="w-full mx-auto bg-gradient-to-r from-amber-500 to-amber-400 ring-2 ring-amber-600 px-1 py-1 rounded-xl flex gap-4 items-start justify-evenly">
 		<section>
 			<p class="text-lg">Balance</p>
 			<h1>{{ balances.current.toLocaleString() }} EUR</h1>
