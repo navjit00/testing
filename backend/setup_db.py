@@ -7,6 +7,10 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banking.db'  # Renamed to a more generic name
 db = SQLAlchemy(app)
 
+class Cache(db.Model):
+    message = db.Column(db.String, primary_key=True)
+    answer = db.Column(db.String, nullable=False)
+
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(50), nullable=False)
@@ -17,6 +21,21 @@ class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     IBAN = db.Column(db.String(50), unique=True, nullable=False)
+
+def add_demo_messages():
+    demo_messages = [
+        {"message": "Hi Chat", "answer": "How can I assist you?"},
+        {"message": "I want to send 10 euros to Jonas", "answer": "Certainly, enter an IBAN"},
+    ]
+
+    for demo_message in demo_messages:
+        new_message = Cache(
+            message=demo_message["message"],
+            answer=demo_message["answer"]
+        )
+        db.session.add(new_message)
+
+    db.session.commit()
 
 def add_demo_transactions():
     """Add 10 demo transactions to the database."""
@@ -58,3 +77,4 @@ if __name__ == "__main__":
         db.create_all()
         add_demo_transactions()
         add_demo_contacts()
+        add_demo_messages()

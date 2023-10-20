@@ -2,14 +2,17 @@ from flask import request, jsonify, make_response
 import openai
 from app import app, db
 from models import Transaction
+from models import Cache
+from models import Contact
 from utils import get_all_transactions
+from sqlalchemy.orm import joinedload
 
 @app.route('/message', methods=['POST', 'OPTIONS'])
 def get_bot_reply():
     if request.method == 'OPTIONS':
         app.logger.info('Received OPTIONS request')
         response = make_response()
-        response.headers["Access-Control-Allow-Origin"] = "*"  # Allow all origins
+        response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Methods"] = "POST"
         response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
         return response
@@ -17,10 +20,17 @@ def get_bot_reply():
     data = request.json
     user_message = data['userMessage']
 
+    cached_messages = Cache.query.all()
+
     messages = [
         {"role": "system", "content": "You are a helpful banking app assistant."},
-        {"role": "user", "content": user_message}
     ]
+
+    for cached_message in cached_messages:
+        messages.append({"role": "user", "content": cached_message.message})
+        messages.append({"role": "assistant", "content": cached_message.answer})
+
+    messages.append({"role": "user", "content": user_message})
 
     functions = [
         {
@@ -28,7 +38,7 @@ def get_bot_reply():
             "description": "Retrieve all banking transactions",
             "parameters": {
                 "type": "object",
-                "properties": {}  # Explicitly defining an empty properties object
+                "properties": {}
             }
         },
         {
@@ -141,3 +151,8 @@ def create_contact():
     db.session.commit()
 
     return jsonify(success=True, message="Contact created successfully!")
+
+def truncate_cache():
+    # Truncate the Cache table
+    Cache.query.delete()
+    db.session.commit()
