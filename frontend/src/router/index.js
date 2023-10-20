@@ -15,17 +15,6 @@ const routes = [
 		component: () => import('@/views/Login.vue')
 	},
 	{
-		name: 'Marketplace',
-		path: '/market',
-		component: () => import('@/views/MarketPlace.vue')
-
-	},
-	{
-		name: 'Profile',
-		path: '/profile',
-		component: () => import('@/views/Profile.vue')
-	},
-	{
 		name: 'Deposit',
 		path: '/deposit',
 		component: () => import('@/views/Deposit.vue')

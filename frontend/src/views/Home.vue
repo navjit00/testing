@@ -1,18 +1,39 @@
 <style scoped>
+
 .title {
-  @apply font-semibold text-success text-lg;
-  @apply font-semibold text-success text-lg;
+  @apply font-semibold text-amber-400 text-lg;
 }
+
+.chatbox::-webkit-scrollbar {
+  width: 1vw;
+  height: 1vh;
+}
+
+.chatbox::-webkit-scrollbar-track {
+  background-color: #e0e0e0;
+  border-radius: 0.4vw;
+}
+
+.chatbox::-webkit-scrollbar-thumb {
+  background-color: #FFCA28;
+  border-radius: 0.4vw;
+}
+
+.chatbox::-webkit-scrollbar-thumb:hover {
+  background-color: #D1A120;
+}
+
 .chatbox {
-  border: 1px solid #e0e0e0;
+  margin-top: 5vh;
+  border: 0.5px solid #e0e0e0;
   padding: 10px;
-  height: 400px;
+  height: 55vh;
   overflow-y: auto;
-  border-radius: 15px;
+  border-radius: 0.5vw;
 }
 .chat-interface {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   margin-top: 10px;
 }
 .chat-input {
@@ -24,7 +45,7 @@
 .send-button {
   padding: 10px;
   border: none;
-  background-color: rgb(0, 203, 146);
+  background-color: #FFCA28;
   color: white;
   border-radius: 0 30px 30px 0;
   cursor: pointer;
@@ -45,8 +66,18 @@
   align-self: flex-end;
 }
 .bot-message {
-  background-color: #d2ffd6;
+  background-color: #FFCA28;
 }
+
+.list-enter-active,
+.list-leave-active {
+  transition: opacity 0.6s;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -62,12 +93,13 @@
 		<HeaderHome />
 		<BalanceCard />
     <section>
-      <h1 class="title">Chatbot</h1>
       <div class="chatbox" ref="chatbox">
-        <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">{{ msg.text }}</div>
+        <TransitionGroup name="list" tag="div">
+          <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">{{ msg.text }}</div>
+        </TransitionGroup>
       </div>
       <div class="chat-interface">
-        <input v-model="userInput" class="chat-input" type="text" placeholder="Type your message..." @keyup.enter="sendMessage" />
+        <input v-model="userInput" class="chat-input" type="text" placeholder="Send a message" @keyup.enter="sendMessage" />
         <button class="send-button" @click="sendMessage"><i class="fas fa-paper-plane"></i></button>
       </div>
     </section>
@@ -80,36 +112,61 @@
 import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
+import axios from 'axios';
 
 const userInput = ref("");
 const messages = ref([]);
+
+async function sendMessage() {
+  if (userInput.value.trim() !== "") {
+    const userMessage = {
+      id: Date.now(),
+      type: "user-message",
+      text: userInput.value,
+      typing: false
+    };
+    messages.value.push(userMessage);
+
+    userInput.value = "";
+
+    try {
+      const response = await axios.post('https://chat.com/api/send', { message: userMessage.text });
+      const apiResponse = response.data;
+
+      messages.value.push({
+        id: Date.now() + 1,
+        type: "bot-message",
+        text: apiResponse.text
+      });
+    } catch (error) {
+      messages.value.push({
+        id: Date.now() + 1,
+        type: "bot-message",
+        text: "Unable to connect to the server."
+      });
+    }
+  }
+}
+
+async function typeMessage(message) {
+  for (let i = 0; i <= message.text.length; i++) {
+    await new Promise(resolve => setTimeout(resolve, 50)); // 50ms delay between each character
+    message.typing = message.text.substring(0, i);
+  }
+  message.typing = false;
+}
+
+
 onMounted(() => {
   messages.value.push({
     id: Date.now(),
     type: "bot-message",
-    text: "Hello there! How can I help you today?"
+    text: "Hello John! How can I help you today?"
   });
   setTimeout(() => {
     const chatbox = document.querySelector(".chatbox");
     chatbox.scrollTop = chatbox.scrollHeight;
   }, 0);
 });
-function sendMessage() {
-  if (userInput.value.trim() !== "") {
-    messages.value.push({
-      id: Date.now(),
-      type: "user-message",
-      text: userInput.value
-    });
-    userInput.value = "";
-    setTimeout(() => {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "bot-message",
-        text: "Thank you for your message. I'll respond soon!"
-      });
-    }, 500);
-  }
-}
 
 </script>
