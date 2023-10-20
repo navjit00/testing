@@ -152,7 +152,7 @@ async function sendMessage() {
       });
     } else {
       try {
-        const response = await axios.post('https://chat.com/api/send', { message: userMessage.text });
+        const response = await axios.post('http://127.0.0.1:5000/message', { userMessage: userMessage.text });
         const apiResponse = response.data;
 
         if (apiResponse.type === "image") {
@@ -160,13 +160,13 @@ async function sendMessage() {
             id: Date.now() + 1,
             type: "bot-message",
             text: "",
-            image: apiResponse.data // URL or base64 data
+            image: apiResponse.data
           });
         } else {
           messages.value.push({
             id: Date.now() + 1,
             type: "bot-message",
-            text: apiResponse.data
+            text: apiResponse.botReply
           });
         }
       } catch (error) {
