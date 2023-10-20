@@ -5,7 +5,7 @@
 }
 
 input {
-    @apply text-gray-300 active:ring-1 focus:ring-1 ring-green-500 duration-300 rounded-lg w-full bg-secondary h-full px-3 focus:ring-2 active:ring-2 ring-secondary;
+    @apply text-gray-300 active:ring-1 focus:ring-1 ring-amber-400 duration-300 rounded-lg w-full bg-secondary h-full px-3 focus:ring-2 active:ring-2 ring-secondary;
 }
 
 </style>
@@ -13,8 +13,8 @@ input {
 <template>
     <main>
         <section class="mt-16 text-gray-300 text-center w-10/12 mx-auto">
-            <h1 class="font-semibold text-lg">Echo Wallet</h1>
-            <p class="text-sm">Maksimalkan sampah anda menjadi sebuah peluang</p>
+            <h1 class="font-semibold text-lg">Simplify Wallet</h1>
+            <p class="text-sm">Login here please</p>
         </section>
             
         <section class="mt-10">
@@ -24,12 +24,12 @@ input {
                 </div>
                 <div class="input-wrapper">
                     <input v-model="form.password" :type="showPassword ? 'text' : 'password'" placeholder="Password">
-                    <span @click="showPassword = !showPassword" class="bg-green-500 rounded-lg w-3/12 h-full grid place-items-center">
+                    <span @click="showPassword = !showPassword" class="bg-amber-400 rounded-lg w-3/12 h-full grid place-items-center">
                         <i :class="showPassword ? 'fa-eye' : 'fa-eye-slash'" class="fa text-lg"></i>
                     </span>
                 </div>
                 <section>
-                    <button class="w-full bg-green-500 font-semibold text-gray-800 py-3 rounded-lg mt-6">
+                    <button class="w-full bg-amber-400 font-semibold text-gray-800 py-3 rounded-lg mt-6">
                         <LoadAction :isLoad="isLoad" :isSuccess="isSuccess" :isFail="isFail" action="LOGIN" />
                     </button>
                     <small class="mt-3 block text-red-600 font-medium">{{ msgErr }}</small>
@@ -43,7 +43,7 @@ input {
                     <i class="fas fa-lightbulb text-sm"></i>
                 </span>
                 <p class="text-sm w-10/12">
-                    Belum punya akun ? Silahkan lakukan pendaftaran di Unit Bank Sampah terdekat
+                    Don't have an account yet? Please register at the nearest Commerzbank unit.
                 </p>
             </div>
                 
@@ -52,7 +52,7 @@ input {
                     <i class="fas fa-lightbulb text-sm"></i>
                 </span>
                 <p class="text-sm w-10/12">
-                    Lupa kata sandi ? Lakukan pemulihan <a href="" class="text-blue-500">disini</a>
+                    Forgot Password ? Reset it <a href="" class="text-blue-500">here</a>
                 </p>
             </div>
         </section>
