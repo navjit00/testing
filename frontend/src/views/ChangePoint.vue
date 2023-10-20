@@ -24,7 +24,5 @@
 
 <script setup>
 
-import Header from '@/components/Header.vue'
-import HelpCenter from '@/components/HelpCenter.vue'
 
 </script>

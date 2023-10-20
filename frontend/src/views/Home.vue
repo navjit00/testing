@@ -95,8 +95,11 @@
 </style>
 
 <template>
-	<main class="pt-20">
-		<HeaderHome />
+	<main class="pt-1">
+    <HeaderHome/>
+    <section class="mt-0">
+      <Services />
+    </section>
 		<BalanceCard />
     <section>
       <div class="chatbox" ref="chatbox">
@@ -122,6 +125,7 @@ import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
+import Services from "@/components/Services.vue";
 
 const userInput = ref("");
 const messages = ref([]);

@@ -58,6 +58,5 @@ input[type=text], select {
 <script setup>
 
 import Header from '@/components/Header.vue'
-import TrashCategory from '@/components/TrashCategory.vue'
 
 </script>
