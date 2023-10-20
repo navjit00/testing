@@ -15,7 +15,6 @@
 			<Services />
 		</section>
     <Chat />
-    <Input />
 
 	</main>
 </template>	
@@ -26,7 +25,6 @@ import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import Services from '@/components/Services.vue'
 import Chat from '@/components/Chat.vue'
-import Input from '@/components/Input.vue'
 
 
 </script>
