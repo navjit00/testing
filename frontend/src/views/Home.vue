@@ -102,12 +102,8 @@
       <div class="chatbox" ref="chatbox">
         <TransitionGroup name="list" tag="div">
           <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
-            <template v-if="msg.image">
-              <img :src="msg.image" alt="Received Image" class="received-image">
-            </template>
-            <template v-else>
-              {{ msg.text }}
-            </template>
+            <div v-if="msg.text">{{ msg.text }}</div>
+            <img v-if="msg.image" :src="msg.image" alt="Received Image" class="received-image">
           </div>
         </TransitionGroup>
       </div>
@@ -147,7 +143,7 @@ async function sendMessage() {
       messages.value.push({
         id: Date.now() + 1,
         type: "bot-message",
-        text: "",
+        text: "Here is an image:\n",
         image: "https://picsum.photos/400/300"
       });
     } else {
