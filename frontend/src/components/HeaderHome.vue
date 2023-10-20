@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<HeaderBar class="z-20">
 		<template v-slot:start>
 			<div class="flex w-7/12 gap-3">
@@ -7,7 +7,7 @@
 				</span>
 				<div class="text-gray-300">
 					<p class="font-semibold text-xl">{{ fullname }}</p>
-					<small class="font-medium text-sm">Hay, selamat pagi</small>
+					<small class="font-medium text-sm">Hey, good morning</small>
 				</div>
 			</div>
 		</template>
@@ -28,7 +28,7 @@
 			</div>
 		</template>
 	</HeaderBar>
-</template>
+</template> -->
 
 <script setup>
 

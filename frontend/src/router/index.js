@@ -16,22 +16,22 @@ const routes = [
 	},
 	{
 		name: 'Deposit',
-		path: '/deposit',
+		path: '/story1',
 		component: () => import('@/views/Deposit.vue')
 	},
 	{
 		name: 'Transfer',
-		path: '/transfer',
+		path: '/story2',
 		component: () => import('@/views/Transfer.vue')
 	},
 	{
 		name: 'WithDraw',
-		path: '/withdraw',
+		path: '/story3',
 		component: () => import('@/views/Withdraw.vue')
 	},
 	{
 		name: 'ChangePoint',
-		path: '/change-point',
+		path: '/story4',
 		component: () => import('@/views/ChangePoint.vue')
 	},
 	{

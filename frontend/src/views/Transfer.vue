@@ -1,5 +1,6 @@
 <template>
-    <main class="text-gray-300">
+    <img src="/banner-2.jpg" alt="Sample 2">
+    <!-- <main class="text-gray-300">
         <Header title="Kirim Uang" sub="Gunakan saldo anda untuk berkirim uang" />
         <section class="mt-20">
             <h1 class="text-lg font-medium">Daftar rekening anda</h1>
@@ -52,7 +53,7 @@
             </List>
         </section>
         <HelpCenter />
-    </main>
+    </main> -->
 </template>
 
 <script setup>

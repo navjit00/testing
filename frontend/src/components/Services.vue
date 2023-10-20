@@ -12,19 +12,19 @@ import IconMenu from '@/components/IconMenu.vue'
 
 const services = [
 	{
-		name: 'Setor',
+		// name: 'Story1',
 		to: 'Deposit'
 	},
 	{
-		name: 'Kirim Uang',
+		// name: 'Story2',
 		to: 'Transfer'
 	},
 	{
-		name: 'Tarik Tunai',
+		// name: 'Story3',
 		to: 'WithDraw'
 	},
 	{
-		name: 'Tukar Poin',
+		// name: 'Story4',
 		to: 'ChangePoint'
 	}
 ]

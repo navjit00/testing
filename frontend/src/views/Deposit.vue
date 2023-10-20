@@ -10,7 +10,8 @@ input[type=text], select {
 
 </style>
 <template>
-	<main>
+	<img src="/banner-2.jpg" alt="Sample 2">
+	<!-- <main>
 		<Header title="Setor" sub="Setor sampah anda disini" />
 		<section class="text-gray-300 mt-20">
 			<h1 class="text-lg font-medium">Formulir</h1>
@@ -52,7 +53,7 @@ input[type=text], select {
 				<button class="bg-green-600 text-gray-300 font-semibold px-3 py-2 w-full rounded-full">Setor</button>
 			</section>
 		</section>
-	</main>
+	</main> -->
 </template>
 <script setup>
 

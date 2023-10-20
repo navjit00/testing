@@ -1,5 +1,6 @@
 <template>
-    <main class="text-gray-300">
+    <img src="/banner-2.jpg" alt="Sample 2">
+    <!-- <main class="text-gray-300">
         <Header title="Tarik Tunai" sub="Tarik saldo anda dalam bentuk tunai" />
         <section class="mt-20">
             <h1 class="text-lg font-medium">Pilih metode</h1>
@@ -44,7 +45,7 @@
             </template>
         </section>
         <HelpCenter />
-    </main>
+    </main> -->
 </template>
 
 <script setup>
