@@ -7,7 +7,7 @@
 				</span>
 				<div class="text-gray-300">
 					<p class="font-semibold text-xl">{{ fullname }}</p>
-					<small class="font-medium text-sm">Hay, selamat pagi</small>
+					<small class="font-medium text-sm">Hey, good morning</small>
 				</div>
 			</div>
 		</template>
