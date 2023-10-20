@@ -15,45 +15,14 @@ const routes = [
 		component: () => import('@/views/Login.vue')
 	},
 	{
-		name: 'Marketplace',
-		path: '/market',
-		component: () => import('@/views/MarketPlace.vue')
-
-	},
-	{
-		name: 'Profile',
-		path: '/profile',
-		component: () => import('@/views/Profile.vue')
-	},
-	{
 		name: 'Deposit',
 		path: '/story1',
 		component: () => import('@/views/Deposit.vue')
 	},
 	{
-		name: 'Transfer',
-		path: '/story2',
-		component: () => import('@/views/Transfer.vue')
-	},
-	{
-		name: 'WithDraw',
-		path: '/story3',
-		component: () => import('@/views/Withdraw.vue')
-	},
-	{
 		name: 'ChangePoint',
 		path: '/story4',
 		component: () => import('@/views/ChangePoint.vue')
-	},
-	{
-		name: 'Notifications',
-		path: '/notifications',
-		component: () => import('@/views/Notifications.vue')
-	},
-	{
-		name: 'Carts',
-		path: '/carts',
-		component: () => import('@/views/Carts.vue')
 	}
 ]
 
