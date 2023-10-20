@@ -2,24 +2,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 h1 {
-    @apply text-base font-semibold m-0 text-white truncate; /* Keeping the modifications */
-}
-
-.transaction-icon {
-    @apply text-base cursor-pointer hover:text-gray-500 text-white mr-2; /* Changed the hover color for a more subtle effect */
-}
-
-main {
-    @apply font-inter w-full h-10 bg-gradient-to-r from-green-300 to-green-700 shadow-lg ring-4 ring-green-500 px-3 flex items-center justify-between rounded-full; /* Enhanced gradient, added shadow for depth, increased height slightly, and made it fully rounded */
+	@apply text-xl font-semibold block my-1;
 }
 </style>
 
 
 
 <template>
-	<main>
-		<h1>{{ animatedBalance }} €</h1>
-		<i class="fas fa-list-ul transaction-icon" title="Transaction History"></i>
+	<main class="w-full mx-auto bg-gradient-to-r from-success to-amber-400 ring-2 ring-amber-600 px-1 py-1 rounded-xl flex gap-4 items-start justify-evenly">
+		<section>
+			<p class="text-lg">Balance</p>
+			<h1>{{ balances.current.toLocaleString() }} EUR</h1>
+			<!-- <span class="w-full flex justify-between items-center">
+				<small>{{ balances.trend.value.toLocaleString() }} EUR</small>
+				<span class="flex items-end">
+					<i class="block fas fa-caret-up text-amber-400 text-xl mr-1"></i>
+					<small class="mb-1 block">{{ balances.trend.percent }}{{ balances.trend.prefix }}</small>
+				</span>
+			</span> -->
+		</section>
+		<!-- <section class="grid place-items-center rounded-lg bg-gradient-to-r from-amber-500 to-amber-500 shadow shadow-gray-800 shadow-inner text-gray-300 px-2 py-3">
+			<section class="flex flex-col text-center">
+				<span class="text-sm">Your points</span>
+				<span>{{ balances.points }}</span>
+			</section>
+		</section> -->
 	</main>
 </template>
 

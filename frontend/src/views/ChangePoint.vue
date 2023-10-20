@@ -1,5 +1,6 @@
 <template>
-    <main class="text-gray-300">
+    <img src="/banner-2.jpg" alt="Sample 2">
+    <!-- <main class="text-gray-300">
         <Header title="Tukar Poin" sub="Dapatkan item menarik disini" />
         <section class="mt-20 flex flex-wrap justify-between">
             <template v-for="card in 12">
@@ -18,12 +19,10 @@
             </template>
         </section>
         <HelpCenter />
-    </main>
+    </main> -->
 </template>
 
 <script setup>
 
-import Header from '@/components/Header.vue'
-import HelpCenter from '@/components/HelpCenter.vue'
 
 </script>

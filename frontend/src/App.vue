@@ -7,7 +7,6 @@
 <script setup>
 
 import { useRoute, useRouter } from 'vue-router'
-import BottomBar from '@/components/BottomBar.vue'
 import { computed } from 'vue'
 
 const route = useRoute()

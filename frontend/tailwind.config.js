@@ -15,7 +15,7 @@ module.exports = {
       fontSize: {
         'xxs': '.55rem'
       },
-      fontFamily: {  // Extend fontFamily
+      fontFamily: {
         'inter': ['Inter', 'sans-serif'],
       },
       boxShadow: {
