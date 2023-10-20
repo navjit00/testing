@@ -14,7 +14,7 @@ input {
     <main>
         <section class="mt-16 text-gray-300 text-center w-10/12 mx-auto">
             <h1 class="font-semibold text-lg">Echo Wallet</h1>
-            <p class="text-sm">Maksimalkan sampah anda menjadi sebuah peluang</p>
+            <p class="text-sm">Login here please</p>
         </section>
             
         <section class="mt-10">
@@ -43,7 +43,7 @@ input {
                     <i class="fas fa-lightbulb text-sm"></i>
                 </span>
                 <p class="text-sm w-10/12">
-                    Belum punya akun ? Silahkan lakukan pendaftaran di Unit Bank Sampah terdekat
+                    Don't have an account yet? Please register at the nearest Commerzbank unit.
                 </p>
             </div>
                 
@@ -52,7 +52,7 @@ input {
                     <i class="fas fa-lightbulb text-sm"></i>
                 </span>
                 <p class="text-sm w-10/12">
-                    Lupa kata sandi ? Lakukan pemulihan <a href="" class="text-blue-500">disini</a>
+                    Forgot Password ? Reset it <a href="" class="text-blue-500">here</a>
                 </p>
             </div>
         </section>
