@@ -8,12 +8,12 @@
 
 <template>
 	<main class="pt-20">
-		<HeaderHome />
-		<BalanceCard />
-		<section class="mt-12"> 
-			<h1 class="title">Layanan</h1>
+		<HeaderHome/>
+		<section class="mt-0"> 
+			<h1 class="title">Stories</h1>
 			<Services />
 		</section>
+		<BalanceCard />
 		<section class="mt-12">
 			<h1 class="title">Promo hari ini</h1>
 			<Promo />
