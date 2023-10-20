@@ -5,7 +5,7 @@
 }
 
 input {
-    @apply text-gray-300 active:ring-1 focus:ring-1 ring-green-500 duration-300 rounded-lg w-full bg-secondary h-full px-3 focus:ring-2 active:ring-2 ring-secondary;
+    @apply text-gray-300 active:ring-1 focus:ring-1 ring-amber-400 duration-300 rounded-lg w-full bg-secondary h-full px-3 focus:ring-2 active:ring-2 ring-secondary;
 }
 
 </style>
@@ -13,7 +13,7 @@ input {
 <template>
     <main>
         <section class="mt-16 text-gray-300 text-center w-10/12 mx-auto">
-            <h1 class="font-semibold text-lg">Echo Wallet</h1>
+            <h1 class="font-semibold text-lg">Simplify Wallet</h1>
             <p class="text-sm">Login here please</p>
         </section>
             
@@ -24,12 +24,12 @@ input {
                 </div>
                 <div class="input-wrapper">
                     <input v-model="form.password" :type="showPassword ? 'text' : 'password'" placeholder="Password">
-                    <span @click="showPassword = !showPassword" class="bg-green-500 rounded-lg w-3/12 h-full grid place-items-center">
+                    <span @click="showPassword = !showPassword" class="bg-amber-400 rounded-lg w-3/12 h-full grid place-items-center">
                         <i :class="showPassword ? 'fa-eye' : 'fa-eye-slash'" class="fa text-lg"></i>
                     </span>
                 </div>
                 <section>
-                    <button class="w-full bg-green-500 font-semibold text-gray-800 py-3 rounded-lg mt-6">
+                    <button class="w-full bg-amber-400 font-semibold text-gray-800 py-3 rounded-lg mt-6">
                         <LoadAction :isLoad="isLoad" :isSuccess="isSuccess" :isFail="isFail" action="LOGIN" />
                     </button>
                     <small class="mt-3 block text-red-600 font-medium">{{ msgErr }}</small>
