@@ -2,7 +2,6 @@
 	<main class="app">
 		<router-view @back="backNavigate"></router-view>
 	</main>
-	<BottomBar v-if="routeName !== 'Login'" />
 </template>
 
 <script setup>
