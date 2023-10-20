@@ -1,4 +1,5 @@
 <style scoped>
+
 .title {
   @apply font-semibold text-amber-400 text-lg;
 }
@@ -116,7 +117,7 @@
     </section>
 
 	</main>
-</template>
+</template>	
 
 <script setup>
 
@@ -190,37 +191,4 @@ onMounted(() => {
   }, 0);
 });
 
-const userInput = ref("");
-const messages = ref([]);
-
-onMounted(() => {
-    messages.value.push({
-        id: Date.now(),
-        type: "bot-message",
-        text: "Hello there! How can I help you today?"
-    });
-    setTimeout(() => {
-        const chatbox = document.querySelector(".chatbox");
-        chatbox.scrollTop = chatbox.scrollHeight;
-    }, 0);
-});
-
-function sendMessage() {
-    if (userInput.value.trim() !== "") {
-        messages.value.push({
-            id: Date.now(),
-            type: "user-message",
-            text: userInput.value
-        });
-        userInput.value = "";
-
-        setTimeout(() => {
-            messages.value.push({
-                id: Date.now() + 1,
-                type: "bot-message",
-                text: "Thank you for your message. I'll respond soon!"
-            });
-        }, 500);
-    }
-}
 </script>

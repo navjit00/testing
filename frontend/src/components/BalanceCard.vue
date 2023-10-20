@@ -1,12 +1,9 @@
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 h1 {
 	@apply text-xl font-semibold block my-1;
 }
 </style>
-
-
 
 <template>
 	<main class="w-full mx-auto bg-gradient-to-r from-success to-amber-400 ring-2 ring-amber-600 px-1 py-1 rounded-xl flex gap-4 items-start justify-evenly">
@@ -30,33 +27,12 @@ h1 {
 	</main>
 </template>
 
-
 <script setup>
 
-import { ref, onMounted, computed } from 'vue'
+import { computed } from 'vue'
 import { useBalance } from '@/stores/balance'
 
 const balance = useBalance()
-const currentBalance = computed(() => balance.current)
-
-const animatedBalance = ref(0)
-
-onMounted(() => {
-    let startBalance = 0;
-    const endBalance = parseFloat(currentBalance.value);
-    const step = endBalance / 50;  // Reduced steps for faster animation
-    
-    const updateBalance = () => {
-        startBalance += step;
-        if (startBalance < endBalance) {
-            animatedBalance.value = startBalance.toFixed(2);
-            requestAnimationFrame(updateBalance);
-        } else {
-            animatedBalance.value = endBalance.toFixed(2);
-        }
-    };
-
-    updateBalance();
-});
+const balances = computed(() => balance)
 
 </script>
