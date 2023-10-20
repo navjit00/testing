@@ -2,13 +2,11 @@
 	<main class="app">
 		<router-view @back="backNavigate"></router-view>
 	</main>
-	<BottomBar v-if="routeName !== 'Login'" />
 </template>
 
 <script setup>
 
 import { useRoute, useRouter } from 'vue-router'
-import BottomBar from '@/components/BottomBar.vue'
 import { computed } from 'vue'
 
 const route = useRoute()
