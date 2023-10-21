@@ -27,9 +27,6 @@
 <script setup>
 
 import { ref } from 'vue'
-import List from '@/components/List.vue'
-import IncrementBar from '@/components/IncrementBar.vue'
-
 const expand = ref(false)
 const showCard = ref(true)
 
