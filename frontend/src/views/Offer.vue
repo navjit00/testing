@@ -1,6 +1,8 @@
 <template>
   <div class="story-container">
-    <button @click="closeStory">x</button>
+    <button @click="closeStory">
+      <img src="/x.png" alt="Close">
+    </button>
     <StoryProgressBar :stories="stories" />
     <Splide @click="handleClick" ref="splideRef" class="mt-3 z-10" :options="options">
       <SplideSlide v-for="story in stories" :key="story.id">
@@ -27,9 +29,8 @@ const options = {
 };
 
 const stories = reactive([
-  { id: 1, progress: 0, isActive: true, imgSrc: '/stories/fined1.png', altText: 'Sample 1' },
-  { id: 2, progress: 0, isActive: false, imgSrc: '/banner-2.jpg', altText: 'Sample 2' },
-  // Add more story objects as needed
+  { id: 1, progress: 0, isActive: true, imgSrc: '/stories/offer1.png', altText: 'Sample 1' },
+  { id: 2, progress: 0, isActive: false, imgSrc: '/stories/offer2.png', altText: 'Sample 2' },
 ]);
 
 const router = useRouter();
@@ -105,6 +106,11 @@ button {
   height: 40px;
   border-radius: 50%;
 }
+
+button img {
+  @apply w-full h-full;
+}
+
 
 .story-container {
   @apply relative;

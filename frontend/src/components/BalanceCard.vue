@@ -25,16 +25,6 @@ h1 {
   box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.75);
 }
 
-.left-bottom-circle,
-.right-bottom-circle {
-  width: 5vw;
-  height: 5vh;
-  border-radius: 50%;
-  background-color: #FFCA28;
-  position: absolute;
-  bottom: 0.5vh;
-}
-
 .left-bottom-circle {
   left: 40px;
   display: flex;
@@ -61,15 +51,14 @@ section {
   <div id="div1" class="w-full mx-auto bg-amber-400 ring-0 ring-amber-600 px-1 py-5 rounded-t-xl flex gap-4 items-start justify-evenly">
     <div class="left-bottom-circle">
 
-      <i class="fa fa-arrow-left" style="font-size:25px;"></i><br>
+
 
     </div>
     <div class="right-bottom-circle">
-      <i class="fa fa-arrow-right" style="font-size:25px;"></i>
+
     </div>
     <section>
-      <h1 id="header1" style="font-size:18px;">Current balance</h1>
-      <h1 id="header2" style="font-size:30px;">{{ balances.current.toLocaleString() }} €</h1>
+      <h1 id="header2" style="font-size:30px;">1400,00 €</h1>
     </section>
   </div>
 </template>

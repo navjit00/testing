@@ -1,6 +1,8 @@
 <template>
   <div class="story-container">
-    <button @click="closeStory">x</button>
+    <button @click="closeStory">
+      <img src="/x.png" alt="Close">
+    </button>
     <StoryProgressBar :stories="stories" />
     <Splide @click="handleClick" ref="splideRef" class="mt-3 z-10" :options="options">
       <SplideSlide v-for="story in stories" :key="story.id">
@@ -85,16 +87,14 @@ img {
 }
 
 button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 20;
-  padding: 8px;
-  background-color: #FBC02D;
-  border: none;
+  @apply absolute top-2 right-2 z-20 p-2 bg-amber-400;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
+}
+
+button img {
+  @apply w-full h-full;
 }
 
 .story-container {
