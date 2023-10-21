@@ -4,6 +4,7 @@ img {
 }
 </style>
 <template>
+  <!-- <img src="/long_story.png" alt="Sample 1"> -->
   <Splide class="mt-3 z-10" :options="options">
     <SplideSlide>
       <img src="/long_story.png" alt="Sample 1">
