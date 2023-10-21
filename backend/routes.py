@@ -1,8 +1,16 @@
 from flask import request, jsonify, make_response
 import openai
 from app import app, db
-from models import Transaction
+from models import Transaction,Message,Contact
 from utils import get_all_transactions
+from enum import Enum
+from sqlalchemy import asc
+
+
+
+class HistoryTypes(Enum):
+    user = 'user'
+    system = 'system'
 
 @app.route('/message', methods=['POST', 'OPTIONS'])
 def get_bot_reply():
@@ -15,12 +23,23 @@ def get_bot_reply():
         return response
 
     data = request.json
-    user_message = data['userMessage']
+    user_message_content = data['userMessage']
 
-    messages = [
-        {"role": "system", "content": "You are a helpful banking app assistant."},
-        {"role": "user", "content": user_message}
-    ]
+    messages = [{"role": "system", "content": "You are a helpful banking app assistant."}]
+
+    # Retrieve all previous messages from the database and add them to the list
+    saved_messages = Message.query.order_by(asc(Message.id)).all()
+    for msg in saved_messages:
+        role = "user" if msg.type == HistoryTypes.user.value else "system"
+        messages.append({"role": role, "content": msg.message})
+
+    # Add the current user message
+    messages.append({"role": "user", "content": user_message_content})
+
+    # Save user message to the database
+    user_message = Message(message=user_message_content, type='user')
+    db.session.add(user_message)
+    db.session.commit()
 
     functions = [
         {
@@ -76,16 +95,8 @@ def get_bot_reply():
             # Extract the provided name and IBAN, if available
             name = function_params.get("name")
             IBAN = function_params.get("IBAN")
-
-            if not name and not IBAN:
-                bot_reply = "Please provide the name and IBAN for the contact."
-                return jsonify(botReply=bot_reply)
             
-            if not IBAN:
-                # If IBAN is missing, ask the user for it
-                bot_reply = "Please provide the IBAN for the contact named {}.".format(name)
-                return jsonify(botReply=bot_reply)
-
+           
             function_response = create_contact()
 
             messages.append(response_message)
@@ -104,6 +115,9 @@ def get_bot_reply():
     else:
         bot_reply = response_message["content"].strip()
 
+    system_message = Message(message=bot_reply, type='system')
+    db.session.add(system_message)
+    db.session.commit()
     return jsonify(botReply=bot_reply)
 
 
@@ -125,19 +139,42 @@ def get_transactions():
     return output
 
 
-@app.route('/create-contact', methods=['POST'])
-def create_contact():
+
+@app.route('/get-messages', methods=['GET'])
+def get_messages():
+    # Query the database for all history entries
+    history_entries = Message.query.all()
+    
+    # Convert history entries to a list of dictionaries
+    output = []
+    for entry in history_entries:
+        entry_data = {}
+        entry_data['id'] = entry.id
+        entry_data['message'] = entry.message
+        entry_data['type'] = entry.type
+        output.append(entry_data)
+    
+    return jsonify(output)
+
+@app.route('/create-message', methods=['POST'])
+def create_message():
     data = request.json
-    name = data['name']
-    IBAN = data['IBAN']
+    message = data['message']
+    type = data['type']
 
-    # Check if IBAN already exists in the database to avoid duplication
-    existing_contact = Contact.query.filter_by(IBAN=IBAN).first()
-    if existing_contact:
-        return jsonify(success=False, message="Contact with this IBAN already exists!")
-
-    new_contact = Contact(name=name, IBAN=IBAN)
-    db.session.add(new_contact)
+    new_message = Message(message=message, type=type)
+    db.session.add(new_message)
     db.session.commit()
 
-    return jsonify(success=True, message="Contact created successfully!")
+    return jsonify(success=True, message="Message entry added successfully!")
+
+
+@app.route('/delete-messages', methods=['DELETE'])
+def delete_messages():
+    try:
+        Message.query.delete()
+        db.session.commit()
+        return jsonify(success=True, message="All messages deleted successfully!")
+    except Exception as e:
+        db.session.rollback()
+        return jsonify(success=False, message=str(e)), 500

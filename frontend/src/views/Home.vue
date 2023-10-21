@@ -152,7 +152,7 @@ async function sendMessage() {
       });
     } else {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/message', { userMessage: userMessage.text });
+        const response = await axios.post('http://127.0.0.1:5001/message', { userMessage: userMessage.text });
         const apiResponse = response.data;
 
         if (apiResponse.type === "image") {
@@ -179,16 +179,23 @@ async function sendMessage() {
     }
   }
 }
-onMounted(() => {
+onMounted(async () => {
+  try {
+    // Attempt to delete all messages from the database
+    await axios.delete('http://127.0.0.1:5001/delete-messages');
+  } catch (error) {
+    console.error("Failed to delete messages:", error);
+  }
+
+  // Push the initial bot message
   messages.value.push({
     id: Date.now(),
     type: "bot-message",
     text: "Hello John! How can I help you today?"
   });
-  setTimeout(() => {
-    const chatbox = document.querySelector(".chatbox");
-    chatbox.scrollTop = chatbox.scrollHeight;
-  }, 0);
+
+  // Scroll to the bottom of the chatbox
+  scrollToBottom();
 });
 
 </script>
