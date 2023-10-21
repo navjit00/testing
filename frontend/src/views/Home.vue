@@ -41,29 +41,42 @@
   padding: 10px;
   border: 1px solid #e0e0e0;
   border-radius: 30px 0 0 30px;
+  background-color: #FFF;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .send-button {
   padding: 10px;
   border: none;
-  background-color: #FFCA28;
   color: white;
   border-radius: 0 30px 30px 0;
   cursor: pointer;
   font-size: 18px;
   transition: transform 0.2s;
+  background-color: #FFD700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .send-button:hover {
   transform: scale(1.1);
+  background-color: #FFCA28;
+
 }
 .message {
   margin: 10px;
   padding: 8px;
   border-radius: 10px;
   animation: fadeIn 0.6s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 .user-message {
-  background-color: #e0e0e0;
+  background: linear-gradient(to top right, #FF7E5F, #feb47b);
+  color: #fff;
+  border-radius: 18px 18px 0 18px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 18px;
+  margin-bottom: 10px;
   align-self: flex-end;
+  font-size: 16px;
 }
 .received-image {
   max-width: 100%;
@@ -72,7 +85,13 @@
 }
 
 .bot-message {
-  background-color: #FFCA28;
+  background: linear-gradient(to top right, #76c7c0, #63a69f);
+  color: #fff;
+  border-radius: 18px 18px 18px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .list-enter-active,
