@@ -41,11 +41,6 @@ def get_bot_reply():
     db.session.add(user_message)
     db.session.commit()
 
-    for cached_message in cached_messages:
-        messages.append({"role": "user", "content": cached_message.message})
-        messages.append({"role": "assistant", "content": cached_message.answer})
-
-    messages.append({"role": "user", "content": user_message})
 
     functions = [
         {
