@@ -20,7 +20,6 @@
     >
       <img :src="source.imageSrc" :alt="source.name" class="absolute top-0 left-0 w-full h-full object-cover">
     </div>
-    <small class="text-gray-300">{{ source.name }}</small>
   </main>
 </template>
 

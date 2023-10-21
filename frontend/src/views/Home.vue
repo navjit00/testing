@@ -21,7 +21,6 @@
 
 .chatbox {
   margin-top: 5vh;
-  border: 0.5px solid #e0e0e0;
   padding: 10px;
   height: 55vh;
   overflow-y: auto;
@@ -30,7 +29,6 @@
 .chat-interface {
   display: flex;
   align-items: stretch;
-  margin-top: 10px;
 }
 .chat-input {
   flex-grow: 1;
@@ -111,10 +109,12 @@
 
 <template>
 	<main >
-    <section class="mt-0">
-      <Stories />
-    </section>
-    <div class="bg-amber-400 h-[1px] mb-[2.5vh]"></div>
+    <div class="bg-amber-400 h-[1px] my-[2.5vh]"></div>
+    <section class="mt-0 mb-[1vh]">
+    <Stories />
+  </section>
+  <div class="bg-amber-400 h-[1px] my-[2.5vh]"></div>
+
     <BalanceCard />
     <section>
       <div class="chatbox" ref="chatbox">
