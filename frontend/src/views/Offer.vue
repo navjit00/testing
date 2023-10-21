@@ -22,10 +22,10 @@ button {
     <StoryProgressBar :stories="stories" />
     <Splide @click="handleClick" ref="splideRef" class="mt-3 z-10" :options="options">
       <SplideSlide>
-        <img src="/stories/fined1.png" alt="Sample 1">
+        <img src="/stories/offer1.png" alt="Sample 1">
       </SplideSlide>
       <SplideSlide>
-        <img src="/banner-2.jpg" alt="Sample 2">
+        <img src="/stories/fined1.png" alt="Sample 2">
       </SplideSlide>
     </Splide>
   </div>
