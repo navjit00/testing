@@ -95,11 +95,12 @@
 </style>
 
 <template>
-  <main class="pt-1">
+	<main class="pt-1">
     <HeaderHome/>
     <section class="mt-0">
       <Services />
     </section>
+    <div class="bg-amber-400 h-[1px]"></div>
     <BalanceCard />
     <section>
       <div class="chatbox" ref="chatbox">
@@ -107,8 +108,6 @@
           <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
             <div v-if="msg.text">{{ msg.text }}</div>
             <img v-if="msg.image" :src="msg.image" alt="Received Image" class="received-image">
-            <BarChartComponent v-if="msg.type === 'bar-chart'" :data="msg.data" />
-            <LineChartComponent v-if="msg.type === 'line-chart'" :data="msg.data" />
           </div>
         </TransitionGroup>
       </div>
@@ -117,9 +116,9 @@
         <button class="send-button" @click="sendMessage"><i class="fas fa-paper-plane"></i></button>
       </div>
     </section>
-  </main>
-</template>
 
+	</main>
+</template>	
 
 <script setup>
 
@@ -127,13 +126,8 @@ import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
-import Services from "@/components/Services.vue";
-import ChartComponent from "@/components/ChartComponent.vue";
-import LineChartComponent from '@/components/LineChartComponent.vue';
+import Services from "@/components/Stories.vue";
 
-const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-const baseURL = import.meta.env.VUE_APP_API_BASE_URL || `http://127.0.0.1:${isMac ? '5001' : '5000'}`;
-console.log(baseURL);
 const userInput = ref("");
 const messages = ref([]);
 
@@ -148,7 +142,6 @@ async function sendMessage() {
 
     messages.value.push(userMessage);
 
-    const lowerCaseText = userInput.value.toLowerCase();
     userInput.value = "";
 
     // Special frontend handlers
@@ -267,11 +260,10 @@ async function sendMessage() {
     }
   }
 }
-
 onMounted(async () => {
   try {
     // Attempt to delete all messages from the database
-    await axios.delete(`${baseURL}/delete-messages`);
+    await axios.delete('http://127.0.0.1:5001/delete-messages');
   } catch (error) {
     console.error("Failed to delete messages:", error);
   }

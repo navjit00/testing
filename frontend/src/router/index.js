@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
-//import { useSession } from '@/stores/session'
-//import { computed } from 'vue'
 
 const routes = [
 	{
@@ -15,28 +13,34 @@ const routes = [
 		component: () => import('@/views/Login.vue')
 	},
 	{
-		name: 'Deposit',
+		name: 'FinEd',
 		path: '/story1',
-		component: () => import('@/views/Deposit.vue')
+		component: () => import('@/views/FinEd.vue'),
+		meta: { imageSrc: '/previews/fined.png' }
 	},
 	{
-		name: 'ChangePoint',
+		name: 'Colab',
+		path: '/story2',
+		component: () => import('@/views/Colab.vue'),
+		meta: { imageSrc: '/previews/colab.png' }
+	},
+	{
+		name: 'Offer',
+		path: '/story3',
+		component: () => import('@/views/Offer.vue'),
+		meta: { imageSrc: '/previews/offer.png' }
+	},
+	{
+		name: 'News',
 		path: '/story4',
-		component: () => import('@/views/ChangePoint.vue')
-	}
+		component: () => import('@/views/News.vue'),
+		meta: { imageSrc: '/previews/news.png' }
+	},
 ]
 
 const router = createRouter({
 		history: createWebHistory(process.env.BASE_URL),
 		routes
 	})
-
-/*Nav guard
-const session = useSession()
-const isAuthenticated = computed(() => session.login)
-
-router.beforeEach((to, next) => {
-	console.log(isAuthenticated.value)
-})*/
 
 export default router
