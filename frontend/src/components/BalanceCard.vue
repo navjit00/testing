@@ -1,18 +1,23 @@
 <style scoped>
 
 h1 {
+  align-content: center;
   @apply text-xl font-semibold block my-2;
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 #header1{
-  margin-top:-40px;
+  margin-top:-2vh;
+}
+
+#header2{
+  align-content: center;
 }
 
 #div1{
   position: relative;
-  width: 400px;
-  height: 100px;
+  width: 70%;
+  height: 10vh;
   background-color: #f2f2f2;
   display: flex;
   justify-content: center;
@@ -22,12 +27,12 @@ h1 {
 
 .left-bottom-circle,
 .right-bottom-circle {
-  width: 80px;
-  height: 80px;
+  width: 5vw;
+  height: 5vh;
   border-radius: 50%;
   background-color: #FFCA28;
   position: absolute;
-  bottom: -15px;
+  bottom: 0.5vh;
 }
 
 .left-bottom-circle {
@@ -43,17 +48,24 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the items vertically */
+  justify-content: center; /* Center the items horizontally */
+}
 </style>
 
 <template>
   <div id="div1" class="w-full mx-auto bg-amber-400 ring-0 ring-amber-600 px-1 py-5 rounded-t-xl flex gap-4 items-start justify-evenly">
     <div class="left-bottom-circle">
 
-      <i class="fa fa-arrow-left" style="font-size:50px;"></i><br>
+      <i class="fa fa-arrow-left" style="font-size:25px;"></i><br>
 
     </div>
     <div class="right-bottom-circle">
-      <i class="fa fa-arrow-right" style="font-size:50px;"></i>
+      <i class="fa fa-arrow-right" style="font-size:25px;"></i>
     </div>
     <section>
       <h1 id="header1" style="font-size:18px;">Current balance</h1>

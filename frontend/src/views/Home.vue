@@ -65,8 +65,8 @@
 
 }
 .user-message {
-  background: linear-gradient(to top right, #FF7E5F, #feb47b);
-  color: #fff;
+  background: linear-gradient(to top right, #FFCA28, #FFD700);
+  color: #000000;
   border-radius: 18px 18px 0 18px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 12px 18px;
@@ -81,8 +81,8 @@
 }
 
 .bot-message {
-  background: linear-gradient(to top right, #76c7c0, #63a69f);
-  color: #fff;
+  background: linear-gradient(to top right, #ffffff, #e0e0e0);
+  color: #000000;
   border-radius: 18px 18px 18px 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 12px 18px;
@@ -115,7 +115,7 @@
     <section class="mt-0">
       <Stories />
     </section>
-    <div class="bg-amber-400 h-[1px]"></div>
+    <div class="bg-amber-400 h-[1px] mb-[2.5vh]"></div>
     <BalanceCard />
     <section>
       <div class="chatbox" ref="chatbox">
