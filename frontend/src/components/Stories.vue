@@ -1,5 +1,5 @@
 <template>
-  <main class="flex justify-between gap-3 mt-3">
+  <main class="flex justify-between gap-3 mt-6">
     <template v-for="(service, x) in services" :key="x">
       <IconMenu :source="service" />
     </template>

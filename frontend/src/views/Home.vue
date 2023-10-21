@@ -110,8 +110,7 @@
 </style>
 
 <template>
-	<main class="pt-1">
-    <HeaderHome/>
+	<main >
     <section class="mt-0">
       <Stories />
     </section>
