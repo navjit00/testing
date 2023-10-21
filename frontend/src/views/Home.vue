@@ -100,7 +100,8 @@
     <section class="mt-0">
       <Services />
     </section>
-		<BalanceCard />
+    <div class="bg-amber-400 h-[1px]"></div>
+    <BalanceCard />
     <section>
       <div class="chatbox" ref="chatbox">
         <TransitionGroup name="list" tag="div">
@@ -125,7 +126,7 @@ import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
-import Services from "@/components/Services.vue";
+import Services from "@/components/Stories.vue";
 
 const userInput = ref("");
 const messages = ref([]);
