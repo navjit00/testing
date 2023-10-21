@@ -13,7 +13,7 @@ input {
 <template>
     <main>
         <section class="mt-16 text-gray-300 text-center w-10/12 mx-auto">
-            <h1 class="font-semibold text-lg">Simplify Wallet</h1>
+            <h1 class="font-semibold text-lg">Simplify Banking</h1>
             <p class="text-sm">Login here please</p>
         </section>
             
@@ -43,7 +43,7 @@ input {
                     <i class="fas fa-lightbulb text-sm"></i>
                 </span>
                 <p class="text-sm w-10/12">
-                    Don't have an account yet? Please register at the nearest Commerzbank unit.
+                    Don't have an account yet? Please register at the nearest Simplify Bank unit.
                 </p>
             </div>
                 
@@ -87,7 +87,7 @@ const login = () => {
             router.push({ name: 'Home' })
         }
         else {
-            [ isLoad.value, isFail.value, msgErr.value ] = [ false, true, 'Username atau password salah' ]
+            [ isLoad.value, isFail.value, msgErr.value ] = [ false, true, 'Username or password is incorrect' ]
         }
     }, 300)
 }
