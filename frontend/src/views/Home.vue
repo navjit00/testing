@@ -151,7 +151,11 @@ async function sendMessage() {
     const lowerCaseText = userInput.value.toLowerCase();
     userInput.value = "";
 
-    if (lowerCaseText === "show me a graph") {
+    // Special frontend handlers
+    if (lowerCaseText === "show me a graph" || lowerCaseText === "show me a line chart" || lowerCaseText === "show me an image") {
+      // Existing special frontend handling code remains unchanged
+      // ...
+      if (lowerCaseText === "show me a graph") {
       messages.value.push({
         id: Date.now() + 1,
         type: "bar-chart",  // Assuming you have a bar chart component
@@ -216,44 +220,48 @@ async function sendMessage() {
   });
 }
  
-    else if (lowerCaseText === "show me an image") {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "bot-message",
-        text: "Here is an image:\n",
-        image: "https://picsum.photos/400/300"
-      });
     } else {
       try {
+        // Send the user message to the backend
         const response = await axios.post(`${baseURL}/message`, { userMessage: userMessage.text });
         const apiResponse = response.data;
-        if (apiResponse.type === "line-chart") {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "line-chart",
-        data: apiResponse.data.data,
-        options: apiResponse.data.options,
-      });
-    }
-    else if (apiResponse.type === "image") {
+        
+        // Extract the bot reply from the response
+        const botReply = apiResponse.botReply;
+        
+        // Handle different types of bot replies
+        if (botReply.type === "message") {
+          messages.value.push({
+            id: Date.now() + 1,
+            type: "bot-message",
+            text: botReply.content,
+            image: null
+          });
+        } else if (botReply.type === "line-chart") {
+          messages.value.push({
+          id: Date.now() + 1,
+          type: "line-chart",
+          data: botReply.content.data,
+          options: botReply.content.options
+        });
+      } 
+ 
+       else if (botReply.type === "image") {
           messages.value.push({
             id: Date.now() + 1,
             type: "bot-message",
             text: "",
-            image: apiResponse.data
+            image: botReply.content
           });
-        } else {
-          messages.value.push({
-            id: Date.now() + 1,
-            type: "bot-message",
-            text: apiResponse.botReply
-          });
-        }
+        } 
+        // Add more 'else if' blocks here for additional types if needed
       } catch (error) {
+        console.error("Error connecting to the server:", error);
         messages.value.push({
           id: Date.now() + 1,
           type: "bot-message",
-          text: "Unable to connect to the server."
+          text: "Unable to connect to the server.",
+          image: null
         });
       }
     }
