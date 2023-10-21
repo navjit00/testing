@@ -95,11 +95,12 @@
 </style>
 
 <template>
-  <main class="pt-1">
+	<main class="pt-1">
     <HeaderHome/>
     <section class="mt-0">
       <Services />
     </section>
+    <div class="bg-amber-400 h-[1px]"></div>
     <BalanceCard />
     <section>
       <div class="chatbox" ref="chatbox">
@@ -107,8 +108,6 @@
           <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
             <div v-if="msg.text">{{ msg.text }}</div>
             <img v-if="msg.image" :src="msg.image" alt="Received Image" class="received-image">
-            <BarChartComponent v-if="msg.type === 'bar-chart'" :data="msg.data" />
-            <LineChartComponent v-if="msg.type === 'line-chart'" :data="msg.data" />
           </div>
         </TransitionGroup>
       </div>
@@ -117,9 +116,9 @@
         <button class="send-button" @click="sendMessage"><i class="fas fa-paper-plane"></i></button>
       </div>
     </section>
-  </main>
-</template>
 
+	</main>
+</template>	
 
 <script setup>
 
@@ -127,13 +126,8 @@ import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
-import Services from "@/components/Services.vue";
-import ChartComponent from "@/components/ChartComponent.vue";
-import LineChartComponent from '@/components/LineChartComponent.vue';
+import Services from "@/components/Stories.vue";
 
-const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-const baseURL = import.meta.env.VUE_APP_API_BASE_URL || `http://127.0.0.1:${isMac ? '5001' : '5000'}`;
-console.log(baseURL);
 const userInput = ref("");
 const messages = ref([]);
 
@@ -148,75 +142,9 @@ async function sendMessage() {
 
     messages.value.push(userMessage);
 
-    const lowerCaseText = userInput.value.toLowerCase();
     userInput.value = "";
 
-    if (lowerCaseText === "show me a graph") {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "bar-chart",  // Assuming you have a bar chart component
-        data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-          }]
-        }
-      });
-    } 
-    else if (lowerCaseText === "show me a line chart") {
-  messages.value.push({
-    id: Date.now() + 1,
-    type: "line-chart",
-    data: {
-      labels: ['January', 'February', 'March', 'April', 'May'],
-      datasets: [
-        {
-          label: 'Monthly Expenses',
-          data: [-15, -25, -35, -20, -30],
-          fill: false,
-          borderColor: 'rgb(255, 99, 132)',
-          tension: 0.1
-        },
-        {
-          label: 'Monthly Profits',
-          data: [10, 20, 30, 40, 50],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        },
-      ]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: false,
-        },
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-    },
-  });
-}
- 
-    else if (lowerCaseText === "show me an image") {
+    if (userMessage.text.toLowerCase() === "show me an image") {
       messages.value.push({
         id: Date.now() + 1,
         type: "bot-message",
@@ -225,17 +153,10 @@ async function sendMessage() {
       });
     } else {
       try {
-        const response = await axios.post(`${baseURL}/message`, { userMessage: userMessage.text });
+        const response = await axios.post('http://127.0.0.1:5001/message', { userMessage: userMessage.text });
         const apiResponse = response.data;
-        if (apiResponse.type === "line-chart") {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: "line-chart",
-        data: apiResponse.data.data,
-        options: apiResponse.data.options,
-      });
-    }
-    else if (apiResponse.type === "image") {
+
+        if (apiResponse.type === "image") {
           messages.value.push({
             id: Date.now() + 1,
             type: "bot-message",
@@ -259,11 +180,10 @@ async function sendMessage() {
     }
   }
 }
-
 onMounted(async () => {
   try {
     // Attempt to delete all messages from the database
-    await axios.delete(`${baseURL}/delete-messages`);
+    await axios.delete('http://127.0.0.1:5001/delete-messages');
   } catch (error) {
     console.error("Failed to delete messages:", error);
   }

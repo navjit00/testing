@@ -1,4 +1,7 @@
 <style scoped>
+.section {
+  margin-top: 2vh;
+}
 
 h1 {
 	@apply text-xl font-semibold block my-1;
@@ -6,7 +9,7 @@ h1 {
 </style>
 
 <template>
-	<main class="w-full mx-auto bg-gradient-to-r from-amber-500 to-amber-400 ring-2 ring-amber-600 px-1 py-1 rounded-xl flex gap-4 items-start justify-evenly">
+  <main class="w-full mx-auto bg-gradient-to-r from-amber-500 to-amber-400 ring-2 ring-amber-600 px-1 py-1 rounded-xl flex gap-4 items-start justify-evenly" style="margin-top: 2vh;">
 		<section>
 			<p class="text-lg">Balance</p>
 			<h1>{{ balances.current.toLocaleString() }} EUR</h1>
