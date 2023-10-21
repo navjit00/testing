@@ -47,7 +47,7 @@ const options = {
   autoplay: true,
   perpage: 1,
   type: 'loop',
-  interval: 3000,
+  interval: 2500,
   pauseOnHover: false
 }
 
