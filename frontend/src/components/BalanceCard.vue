@@ -1,50 +1,55 @@
 <template>
-  <div id="div1" class="mx-auto bg-amber-400 ring-0 ring-amber-600 px-1 py-5 rounded-t-xl flex items-center justify-center relative">
-    <div class="left-bottom-circle icon-background">
+  <div class="balance-container">
+    <div class="currency-symbol-container">
+      <span class="currency-symbol">€</span>
     </div>
-    <section>
-      <h1 id="header2" class="text-4xl font-semibold my-2 text-center">1,400.00 €</h1>
-    </section>
-    <div class="right-bottom-circle icon-background">
-    </div>
+    <span class="balance-amount">{{ formattedBalance }}&#160€</span>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useBalance } from '@/stores/balance';
+import { ref, computed } from 'vue';
 
-const balance = useBalance();
-const balances = computed(() => balance.value);
+const balance = ref(1400);
+const formattedBalance = computed(() => {
+  let balanceParts = balance.value.toFixed(2).split(".");
+  let formatted = `${balanceParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")},${balanceParts[1]}`;
+  return formatted;
+});
 </script>
 
 <style scoped>
-#div1 {
-  position: relative;
-  width: 70%;
-  height: 10vh;
-  background-color: #f2f2f2;
-  box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.75);
+.balance-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FBBF24;
+  padding: 12px 12px;
+  border-radius: 20px;
 }
 
-.left-bottom-circle, .right-bottom-circle {
-  position: absolute;
-  width: 40px;
-  height: 40px;
+.currency-symbol-container {
+  background-color: white;
+  border-radius: 50%;
+  width: calc((5vw + 5vh) / 2);
+  height: calc((5vw + 5vh) / 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3vw;
 }
 
-
-.left-bottom-circle {
-  bottom: 10px;
-  left: 10px;
+.currency-symbol {
+  color: #FBBF24;
+  font-size: 2em;
+  font-weight: bold;
 }
 
-.right-bottom-circle {
-  bottom: 10px;
-  right: 10px;
-}
-
-section {
-  flex: 1;
+.balance-amount {
+  margin-top: 1vh;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 15vw;
 }
 </style>

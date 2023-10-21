@@ -30,29 +30,40 @@
   display: flex;
   align-items: stretch;
 }
+
 .chat-input {
+  padding: calc((1vh + 1vw) / 2);
+  margin-left: 2vw;
+  width: 60%;
   flex-grow: 1;
-  padding: 10px;
   border: 1px solid #e0e0e0;
-  border-radius: 30px 0 0 30px;
+  border-radius: 2em;
   background-color: #FFF;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2vh;
 }
+
 .send-button {
-  padding: 10px;
+  margin-left: 1vw;
+  margin-right: 2vw;
+  width: calc((5vw + 5vh) / 2);
+  height: calc((5vw + 5vh) / 2);
   border: none;
   color: white;
-  border-radius: 0 30px 30px 0;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 1em;
   transition: transform 0.2s;
-  background-color: #FFD700;
+  background-color: #FFCA28;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .send-button:hover {
   transform: scale(1.1);
-  background-color: #FFCA28;
-
+  background-color: #FFD700;
 }
 .message {
   margin: 10px;
@@ -105,18 +116,30 @@
     opacity: 1;
   }
 }
+
+.chat-wrapper {
+
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  background-color: #2F2F2F;
+}
+
 </style>
 
 <template>
 	<main >
     <div class="bg-amber-400 h-[1px] my-[2.5vh]"></div>
     <section class="mt-0 mb-[1vh]">
-    <Stories />
-  </section>
-  <div class="bg-amber-400 h-[1px] my-[2.5vh]"></div>
-
+      <Stories />
+    </section>
+    <div class="bg-amber-400 h-[1px] my-[2.5vh]"></div>
     <BalanceCard />
-    <section>
+	</main>
+  <section>
+    <div class="chat-wrapper">
       <div class="chatbox" ref="chatbox">
         <TransitionGroup name="list" tag="div">
           <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
@@ -128,11 +151,10 @@
       </div>
       <div class="chat-interface">
         <input v-model="userInput" class="chat-input" type="text" placeholder="Send a message" @keyup.enter="sendMessage" />
-        <button class="send-button" @click="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        <button class="send-button" @click="sendMessage"><i class="fas fa-arrow-up"></i></button>
       </div>
-    </section>
-
-	</main>
+    </div>
+  </section>
 </template>	
 
 
@@ -168,7 +190,6 @@ async function sendMessage() {
 
     // Special frontend handlers
     if (lowerCaseText === "show me a graph" || lowerCaseText === "show me a line chart" || lowerCaseText === "show me an image") {
-      // Existing special frontend handling code remains unchanged
       // ...
       if (lowerCaseText === "show me a graph") {
       messages.value.push({
@@ -269,7 +290,6 @@ async function sendMessage() {
             image: botReply.content
           });
         } 
-        // Add more 'else if' blocks here for additional types if needed
       } catch (error) {
         console.error("Error connecting to the server:", error);
         messages.value.push({
@@ -285,20 +305,17 @@ async function sendMessage() {
 
 onMounted(async () => {
   try {
-    // Attempt to delete all messages from the database
     await axios.delete(`${baseURL}/delete-messages`);
   } catch (error) {
     console.error("Failed to delete messages:", error);
   }
 
-  // Push the initial bot message
   messages.value.push({
     id: Date.now(),
     type: "bot-message",
     text: "Hello John! How can I help you today?"
   });
 
-  // Scroll to the bottom of the chatbox
   scrollToBottom();
 });
 

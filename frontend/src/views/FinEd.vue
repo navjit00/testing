@@ -30,8 +30,7 @@ const options = {
 
 const stories = reactive([
   { id: 1, progress: 0, isActive: true, imgSrc: '/stories/fined1.png', altText: 'Sample 1' },
-  { id: 2, progress: 0, isActive: false, imgSrc: '/banner-2.jpg', altText: 'Sample 2' },
-  { id: 3, progress: 0, isActive: false, imgSrc: '/banner-3.jpg', altText: 'Sample 3' }
+  { id: 2, progress: 0, isActive: false, imgSrc: '/stories/fined2.png', altText: 'Sample 2' },
 ]);
 
 const router = useRouter();

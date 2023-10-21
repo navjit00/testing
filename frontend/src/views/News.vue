@@ -28,7 +28,7 @@ const options = {
 };
 
 const stories = reactive([
-  { id: 1, progress: 0, isActive: true, imgSrc: '/stories/fined1.png', altText: 'Sample 1' },
+  { id: 1, progress: 0, isActive: true, imgSrc: '/stories/fined2.png', altText: 'Sample 1' },
   { id: 2, progress: 0, isActive: false, imgSrc: '/banner-2.jpg', altText: 'Sample 2' },
   // Add more stories as needed
 ]);
