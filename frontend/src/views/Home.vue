@@ -131,6 +131,9 @@ import Services from "@/components/Services.vue";
 import ChartComponent from "@/components/ChartComponent.vue";
 import LineChartComponent from '@/components/LineChartComponent.vue';
 
+const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+const baseURL = import.meta.env.VUE_APP_API_BASE_URL || `http://127.0.0.1:${isMac ? '5001' : '5000'}`;
+console.log(baseURL);
 const userInput = ref("");
 const messages = ref([]);
 
@@ -222,10 +225,17 @@ async function sendMessage() {
       });
     } else {
       try {
-        const response = await axios.post('http://127.0.0.1:5001/message', { userMessage: userMessage.text });
+        const response = await axios.post(`${baseURL}/message`, { userMessage: userMessage.text });
         const apiResponse = response.data;
-
-        if (apiResponse.type === "image") {
+        if (apiResponse.type === "line-chart") {
+      messages.value.push({
+        id: Date.now() + 1,
+        type: "line-chart",
+        data: apiResponse.data.data,
+        options: apiResponse.data.options,
+      });
+    }
+    else if (apiResponse.type === "image") {
           messages.value.push({
             id: Date.now() + 1,
             type: "bot-message",
@@ -253,7 +263,7 @@ async function sendMessage() {
 onMounted(async () => {
   try {
     // Attempt to delete all messages from the database
-    await axios.delete('http://127.0.0.1:5001/delete-messages');
+    await axios.delete(`${baseURL}/delete-messages`);
   } catch (error) {
     console.error("Failed to delete messages:", error);
   }
