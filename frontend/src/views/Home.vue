@@ -98,7 +98,7 @@
 	<main class="pt-1">
     <HeaderHome/>
     <section class="mt-0">
-      <Services />
+      <Stories />
     </section>
     <div class="bg-amber-400 h-[1px]"></div>
     <BalanceCard />
@@ -127,7 +127,7 @@ import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
-import Services from "@/components/Services.vue";
+import Stories from "@/components/Stories.vue";
 import ChartComponent from "@/components/ChartComponent.vue";
 import LineChartComponent from '@/components/LineChartComponent.vue';
 
