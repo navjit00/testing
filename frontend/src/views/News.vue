@@ -4,7 +4,10 @@ img {
 }
 
 button {
-  @apply absolute top-2 right-2 z-20 p-2 bg-amber-400 rounded-full;
+  @apply absolute top-2 right-2 z-20 p-2 bg-amber-400;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .story-container {
@@ -20,12 +23,6 @@ button {
     <Splide @click="handleClick" ref="splideRef" class="mt-3 z-10" :options="options">
       <SplideSlide>
         <img src="/stories/fined1.png" alt="Sample 1">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="/banner-2.jpg" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="/banner-3.jpg" alt="Sample 1">
       </SplideSlide>
       <SplideSlide>
         <img src="/banner-2.jpg" alt="Sample 2">
@@ -54,8 +51,6 @@ const options = {
 const stories = reactive([
   {id: 1, progress: 0, isActive: true},
   {id: 2, progress: 0, isActive: false},
-  {id: 3, progress: 0, isActive: false},
-  {id: 4, progress: 0, isActive: false}
 ]);
 
 const router = useRouter()
