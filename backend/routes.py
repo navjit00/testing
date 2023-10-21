@@ -17,7 +17,7 @@ def get_bot_reply():
     if request.method == 'OPTIONS':
         app.logger.info('Received OPTIONS request')
         response = make_response()
-        response.headers["Access-Control-Allow-Origin"] = "*"  # Allow all origins
+        response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Methods"] = "POST"
         response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
         return response
@@ -41,13 +41,19 @@ def get_bot_reply():
     db.session.add(user_message)
     db.session.commit()
 
+    for cached_message in cached_messages:
+        messages.append({"role": "user", "content": cached_message.message})
+        messages.append({"role": "assistant", "content": cached_message.answer})
+
+    messages.append({"role": "user", "content": user_message})
+
     functions = [
         {
             "name": "get_all_transactions",
             "description": "Retrieve all banking transactions",
             "parameters": {
                 "type": "object",
-                "properties": {}  # Explicitly defining an empty properties object
+                "properties": {}
             }
         },
         {
