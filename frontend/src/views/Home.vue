@@ -108,6 +108,7 @@
           <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
             <div v-if="msg.text">{{ msg.text }}</div>
             <img v-if="msg.image" :src="msg.image" alt="Received Image" class="received-image">
+            <LineChartComponent v-if="msg.type === 'line-chart'" :data="msg.data" />
           </div>
         </TransitionGroup>
       </div>
