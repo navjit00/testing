@@ -5,15 +5,15 @@ export const useNotifications = defineStore('notifications', {
         return {
             lists: [
                 {
-                title: 'Anda mendapatkan tambahan 50 poin',
+                title: 'Received 50 euros',
                 timestamp: '20/03/2022'
                 },
                 {
-                title: 'Anda mendapatkan tambahan 50 poin',
+                title: 'Received 50 euros',
                 timestamp: '20/03/2022'
                 },
                 {
-                title: 'Anda mendapatkan tambahan 50 poin',
+                title: 'Received 50 euros',
                 timestamp: '20/03/2022'
                 }
             ]
