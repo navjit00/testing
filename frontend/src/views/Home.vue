@@ -98,7 +98,7 @@
 	<main class="pt-1">
     <HeaderHome/>
     <section class="mt-0">
-      <Services />
+      <Stories />
     </section>
     <div class="bg-amber-400 h-[1px]"></div>
     <BalanceCard />
@@ -108,6 +108,7 @@
           <div v-for="msg in messages" :key="msg.id" class="message" :class="msg.type">
             <div v-if="msg.text">{{ msg.text }}</div>
             <img v-if="msg.image" :src="msg.image" alt="Received Image" class="received-image">
+            <LineChartComponent v-if="msg.type === 'line-chart'" :data="msg.data" />
           </div>
         </TransitionGroup>
       </div>
@@ -120,14 +121,20 @@
 	</main>
 </template>	
 
+
 <script setup>
 
 import { ref, onMounted } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
-import Services from "@/components/Stories.vue";
+import Stories from "@/components/Stories.vue";
+import ChartComponent from "@/components/ChartComponent.vue";
+import LineChartComponent from '@/components/LineChartComponent.vue';
 
+const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+const baseURL = import.meta.env.VUE_APP_API_BASE_URL || `http://127.0.0.1:${isMac ? '5001' : '5000'}`;
+console.log(baseURL);
 const userInput = ref("");
 const messages = ref([]);
 
@@ -142,6 +149,7 @@ async function sendMessage() {
 
     messages.value.push(userMessage);
 
+    const lowerCaseText = userInput.value.toLowerCase();
     userInput.value = "";
 
     // Special frontend handlers
@@ -260,10 +268,11 @@ async function sendMessage() {
     }
   }
 }
+
 onMounted(async () => {
   try {
     // Attempt to delete all messages from the database
-    await axios.delete('http://127.0.0.1:5001/delete-messages');
+    await axios.delete(`${baseURL}/delete-messages`);
   } catch (error) {
     console.error("Failed to delete messages:", error);
   }
