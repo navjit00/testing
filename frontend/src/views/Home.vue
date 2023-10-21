@@ -1,23 +1,9 @@
 <style scoped>
-
 .chatbox::-webkit-scrollbar {
-  width: 1vw;
-  height: 1vh;
+  width: 0;
+  height: 0;
 }
 
-.chatbox::-webkit-scrollbar-track {
-  background-color: #e0e0e0;
-  border-radius: 0.4vw;
-}
-
-.chatbox::-webkit-scrollbar-thumb {
-  background-color: #FFCA28;
-  border-radius: 0.4vw;
-}
-
-.chatbox::-webkit-scrollbar-thumb:hover {
-  background-color: #D1A120;
-}
 
 .chatbox {
   margin-top: 5vh;
@@ -25,6 +11,10 @@
   height: 55vh;
   overflow-y: auto;
   border-radius: 0.5vw;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scroll-behavior: smooth;
+
 }
 .chat-interface {
   display: flex;
@@ -160,7 +150,7 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, watch } from 'vue';
 import HeaderHome from '@/components/HeaderHome.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
 import axios from 'axios';
@@ -173,6 +163,7 @@ const baseURL = import.meta.env.VUE_APP_API_BASE_URL || `http://127.0.0.1:${isMa
 console.log(baseURL);
 const userInput = ref("");
 const messages = ref([]);
+const chatbox = ref(null);
 
 async function sendMessage() {
   if (userInput.value.trim() !== "") {
@@ -301,7 +292,19 @@ async function sendMessage() {
       }
     }
   }
+  scrollToBottom();
 }
+const scrollToBottom = () => {
+  nextTick(() => {
+    if (chatbox.value) {
+      chatbox.value.scrollTop = chatbox.value.scrollHeight;
+    }
+  });
+};
+
+watch(userInput, () => {
+  scrollToBottom();
+});
 
 onMounted(async () => {
   try {
