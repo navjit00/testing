@@ -1,7 +1,7 @@
 <template>
   <div class="progress-container">
     <div v-for="story in stories" :key="story.id" class="story-bar">
-      <div :class="{'bar-active': story.isActive}" :style="{width: story.progress + '%'}"></div>
+      <div :class="['bar', {'bar-active': story.isActive}]" :style="{width: story.progress + '%'}"></div>
     </div>
   </div>
 </template>
@@ -25,14 +25,21 @@ export default {
   height: 3px;
   flex: 1;
   margin: 0 2px;
-  background-color: #D1A120;
+  background-color: #D1D1D1;
   position: relative;
   overflow: hidden;
 }
 
-.bar-active {
-  @apply absolute top-0 left-0 h-full w-0 bg-amber-400;
-  transition: width 3s linear;
+.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #D1A120;
+  transition: width 0.1s linear;
 }
 
+.bar-active {
+  background-color: #FBC02D; /* Active color */
+}
 </style>
