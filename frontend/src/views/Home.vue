@@ -1,9 +1,5 @@
 <style scoped>
 
-.title {
-  @apply font-semibold text-amber-400 text-lg;
-}
-
 .chatbox::-webkit-scrollbar {
   width: 1vw;
   height: 1vh;
