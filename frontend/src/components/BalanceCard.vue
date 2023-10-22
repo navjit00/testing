@@ -1,21 +1,13 @@
 <template>
   <div class="balance-container">
-    <div class="currency-symbol-container">
-      <span class="currency-symbol">€</span>
-    </div>
-    <span class="balance-amount">{{ formattedBalance }}&#160€</span>
+    <span class="balance-amount">1.400,58 €</span>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 const balance = ref(1400);
-const formattedBalance = computed(() => {
-  let balanceParts = balance.value.toFixed(2).split(".");
-  let formatted = `${balanceParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")},${balanceParts[1]}`;
-  return formatted;
-});
 </script>
 
 <style scoped>
@@ -23,33 +15,27 @@ const formattedBalance = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FBBF24;
-  padding: 12px 12px;
-  border-radius: 20px;
+  background: linear-gradient(135deg, #FBBF24, #FFA726);
+  background-size: 200% 200%;
+  padding: 20px; 
+  border-radius: 30px; 
+  animation: shiny 20s infinite linear; 
+  box-shadow: 0 0 15px #FBBF24; 
 }
 
-.currency-symbol-container {
-  background-color: white;
-  border-radius: 50%;
-  width: calc((5vw + 5vh) / 2);
-  height: calc((5vw + 5vh) / 2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 3vw;
-}
-
-.currency-symbol {
-  color: #FBBF24;
-  font-size: 2em;
-  font-weight: bold;
+@keyframes shiny {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
 }
 
 .balance-amount {
-  margin-top: 1vh;
-  color: black;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-right: 15vw;
+  color: #fff;
+  font-size: 2.5rem; 
+  font-weight: 900;
+  text-shadow: 0 0 10px #FFA726;
 }
 </style>

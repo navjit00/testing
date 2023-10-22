@@ -6,7 +6,7 @@
 
 
 .chatbox {
-  margin-top: 5vh;
+  margin-top: 2vh;
   padding: 10px;
   height: 55vh;
   overflow-y: auto;
@@ -112,9 +112,7 @@
   width: 100%;
   height: 100%;
   position: relative;
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
-  background-color: #2F2F2F;
+
 }
 
 </style>
